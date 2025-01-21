@@ -43,7 +43,7 @@
                         <h3 class="text-lg font-bold text-gray-900">@item.Name</h3>
                         @*<p class="text-sm text-gray-600">Klasik ve şık takım elbiseler çocuklarınız için.</p>*@
                     </div>
-                    <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)"
+                    <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.SeoUrl)"
                        class="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         @ViewData["view"]
                     </a>

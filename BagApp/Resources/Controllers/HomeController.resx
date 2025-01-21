@@ -129,4 +129,10 @@
   <data name="featured" xml:space="preserve">
     <value />
   </data>
+  <data name="stockno" xml:space="preserve">
+    <value />
+  </data>
+  <data name="whatsapporder" xml:space="preserve">
+    <value />
+  </data>
 </root>

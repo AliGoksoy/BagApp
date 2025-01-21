@@ -123,10 +123,10 @@ body::-webkit-scrollbar {
 
 
 .hc-offcanvas-nav .nav-content {
-    background: linear-gradient(to right, #1e40af, #0ea5e9, #14b8a6);
+    background-color: #1e40af;
 }
 .hc-offcanvas-nav ul {
-    background: linear-gradient(to right, #1e40af, #0ea5e9, #14b8a6);
+    background-color: #1e40af;
 }
 
 .hc-offcanvas-nav .nav-content h2{

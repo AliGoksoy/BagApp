@@ -129,4 +129,10 @@
   <data name="featured" xml:space="preserve">
     <value>Öne Çıkanlar</value>
   </data>
+  <data name="stockno" xml:space="preserve">
+    <value>Stok Kodu</value>
+  </data>
+  <data name="whatsapporder" xml:space="preserve">
+    <value>Whatsapp Sipariş</value>
+  </data>
 </root>

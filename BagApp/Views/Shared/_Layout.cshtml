@@ -30,7 +30,7 @@
 
     <!-- Header Container -->
     <header>
-        <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 shadow-md z-50 transition-all duration-300">
+        <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600  shadow-md z-50 transition-all duration-300">
             <div class="container mx-auto px-4 py-2 flex items-center justify-between">
                 <!-- Logo and Title -->
                 <a href="~/">
@@ -38,7 +38,7 @@
                     <div class="flex items-center space-x-4 cursor-pointer">
                         <img src="~/images/logo/logo.png" alt="Logo" class="h-8 w-8 rounded-full">
                         <span class="font-bold text-lg text-white">Looks Kids</span>
-                      
+
                     </div>
                 </a>
 
@@ -100,12 +100,19 @@
             </li>
             <li><a href="~/iletisim">@Localizer["contact"]</a></li>
 
-          
+
         </ul>
-    
+
 
     </nav>
 
+    <div class="fixed bottom-4 right-4 lg:hidden px-2 py-1 bg-white rounded shadow-lg">
+        <a href="https://api.whatsapp.com/send?phone=@TempData["Gsm"]&text=Sipariş vermek istiyorum @TempData["SiteUrl"]"
+           target="_blank" class="text-black rounded-full flex items-center space-x-2 hover:scale-105 transition-transform">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="w-5 h-5 rounded-full">
+            <span class="text-black">Whatsapp</span>
+        </a>
+    </div>
 
 
     @RenderBody()
@@ -191,7 +198,7 @@
             </div>
             <div class="mt-10 text-center text-gray-500 text-sm border-t border-gray-700 pt-6">
                 <p>© 2025 Looks Kids. @Localizer["copy"].</p>
-              
+
             </div>
         </div>
     </footer>

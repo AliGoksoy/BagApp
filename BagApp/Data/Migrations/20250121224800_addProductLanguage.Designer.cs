@@ -3,14 +3,16 @@ using BagApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BagApp.Data.Migrations
 {
     [DbContext(typeof(BagContext))]
-    partial class BagContextModelSnapshot : ModelSnapshot
+    [Migration("20250121224800_addProductLanguage")]
+    partial class addProductLanguage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

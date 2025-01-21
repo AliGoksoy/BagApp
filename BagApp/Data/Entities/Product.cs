@@ -8,6 +8,8 @@ namespace BagApp.Data.Entities
         public string English { get; set; }
         public string Arabic { get; set; }
         public string Description { get; set; }
+        public string DescriptionEN { get; set; }
+        public string DescriptionAR { get; set; }
         public string StockNo { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }

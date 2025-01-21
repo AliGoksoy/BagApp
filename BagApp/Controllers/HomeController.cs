@@ -93,7 +93,7 @@ namespace BagApp.Controllers
             return LocalRedirect(returnUrl);
 
         }
-         //[Route("~/anasayfa")]
+        //[Route("~/anasayfa")]
         public async Task<IActionResult> Index()
         {
             ViewData["view"] = _localizer.GetString("view");
@@ -121,12 +121,12 @@ namespace BagApp.Controllers
             {
                 case "tr-TR":
                     dataCategory = await queryCategory.Where(x => x.Stat == true).Select(x => new CategoryDto { Id = x.Id, Name = x.Name, Image = x.Image }).ToListAsync();
-                    dataProduct = await queryProduct.Where(x => x.Stat == true && x.Home == true).OrderBy(x => x.Name).Include(x => x.Category).Include(x => x.Subcategory).Select( x=> new ProductDto
+                    dataProduct = await queryProduct.Where(x => x.Stat == true && x.Home == true).OrderBy(x => x.Name).Include(x => x.Category).Include(x => x.Subcategory).Select(x => new ProductDto
                     {
                         Id = x.Id,
                         Name = x.Name,
                         Image = x.Image,
-                        Category = new CategoryDto { Name=x.Name},
+                        Category = new CategoryDto { Name = x.Category.Name, SeoUrl = x.Category.SeoUrl },
                         Subcategory = new SubcategoryDto { Name = x.Subcategory.Name },
                         StockNo = x.StockNo,
                         SeoUrl = x.SeoUrl
@@ -141,7 +141,7 @@ namespace BagApp.Controllers
                         Id = x.Id,
                         Name = x.English,
                         Image = x.Image,
-                        Category = new CategoryDto { Name = x.English },
+                        Category = new CategoryDto { Name = x.Category.English, SeoUrl = x.Category.SeoUrl },
                         Subcategory = new SubcategoryDto { Name = x.Subcategory.English },
                         StockNo = x.StockNo,
                         SeoUrl = x.SeoUrl
@@ -155,7 +155,7 @@ namespace BagApp.Controllers
                         Id = x.Id,
                         Name = x.English,
                         Image = x.Image,
-                        Category = new CategoryDto { Name = x.Arabic },
+                        Category = new CategoryDto { Name = x.Category.Arabic, SeoUrl = x.Category.SeoUrl },
                         Subcategory = new SubcategoryDto { Name = x.Subcategory.Arabic },
                         StockNo = x.StockNo,
                         SeoUrl = x.SeoUrl
@@ -221,9 +221,32 @@ namespace BagApp.Controllers
             ViewData["view"] = _localizer.GetString("view");
             ViewData["product"] = _localizer.GetString("product");
             await ThemeVersion();
-
             var queryCategory = _uow.GetRepository<Category>().GetQueryable();
-            var dataCategory = await queryCategory.Where(x => x.Stat == true).ToListAsync();
+            var dataCategory = new List<CategoryDto>();
+            switch (userLanguage)
+            {
+                case "tr-TR":
+                    dataCategory = await queryCategory.Where(x => x.Stat == true)
+                        .Select(x => new CategoryDto { Id = x.Id, Name = x.Name, Image = x.Image, SeoUrl = x.SeoUrl }).ToListAsync();
+
+                    break;
+
+                case "en-US":
+                    dataCategory = await queryCategory.Where(x => x.Stat == true)
+                        .Select(x => new CategoryDto { Id = x.Id, Name = x.English, Image = x.Image, SeoUrl = x.SeoUrl }).ToListAsync();
+
+                    break;
+                case "ar-SA":
+                    dataCategory = await queryCategory.Where(x => x.Stat == true)
+                        .Select(x => new CategoryDto { Id = x.Id, Name = x.Arabic, Image = x.Image, SeoUrl = x.SeoUrl }).ToListAsync();
+
+                    break;
+                default:
+                    break;
+            }
+
+
+
             ViewBag.Category = _mapper.Map<List<CategoryDto>>(dataCategory);
 
 
@@ -236,29 +259,65 @@ namespace BagApp.Controllers
             //category = @Url.FriendlyUrl(category);
             await ThemeVersion();
             var query = _uow.GetRepository<Product>().GetQueryable();
-            var data = await query.Where(x => x.Category.SeoUrl == category).Include(x => x.Category).Include(x => x.Subcategory).ToListAsync();
-            var dto = _mapper.Map<List<ProductDto>>(data);
+
+            var product = new List<ProductDto>();
+
+
+
             var dataCategory = await _uow.GetRepository<Category>().GetByIdAsync(x => x.SeoUrl == category);
             string userLanguage = CultureInfo.CurrentUICulture.ToString();
             ViewData["lang"] = userLanguage;
-
-            if (data.Count > 0)
+            ViewData["view"] = _localizer.GetString("view");
+            if (dataCategory != null)
             {
                 if (userLanguage == "tr-TR")
                 {
                     ViewBag.CategoryName = dataCategory.Name;
+                    product = await query.Where(x => x.Category.SeoUrl == category).Include(x => x.Category).Include(x => x.Subcategory)
+                             .Select(x => new ProductDto
+                             {
+                                 Id = x.Id,
+                                 Name = x.Name,
+                                 Image = x.Image,
+                                 Category = new CategoryDto { Name = x.Category.Name, SeoUrl = x.Category.SeoUrl },
+                                 Subcategory = new SubcategoryDto { Name = x.Subcategory.Name },
+                                 StockNo = x.StockNo,
+                                 SeoUrl = x.SeoUrl
+                             }).ToListAsync();
                 }
                 else if (userLanguage == "en-US")
                 {
                     ViewBag.CategoryName = dataCategory.English;
+                    product = await query.Where(x => x.Category.SeoUrl == category).Include(x => x.Category).Include(x => x.Subcategory)
+                        .Select(x => new ProductDto
+                        {
+                            Id = x.Id,
+                            Name = x.English,
+                            Image = x.Image,
+                            Category = new CategoryDto { Name = x.Category.English, SeoUrl = x.Category.SeoUrl },
+                            Subcategory = new SubcategoryDto { Name = x.Subcategory.English },
+                            StockNo = x.StockNo,
+                            SeoUrl = x.SeoUrl
+                        }).ToListAsync();
                 }
                 else if (userLanguage == "ar-SA")
                 {
                     ViewBag.CategoryName = dataCategory.Arabic;
+                    product = await query.Where(x => x.Category.SeoUrl == category).Include(x => x.Category).Include(x => x.Subcategory)
+                        .Select(x => new ProductDto
+                        {
+                            Id = x.Id,
+                            Name = x.Arabic,
+                            Image = x.Image,
+                            Category = new CategoryDto { Name = x.Category.Arabic, SeoUrl = x.Category.SeoUrl },
+                            Subcategory = new SubcategoryDto { Name = x.Subcategory.Arabic },
+                            StockNo = x.StockNo,
+                            SeoUrl = x.SeoUrl
+                        }).ToListAsync();
                 }
 
 
-                return View(dto);
+                return View(product);
             }
             else
             {
@@ -282,12 +341,91 @@ namespace BagApp.Controllers
 
             string userLanguage = CultureInfo.CurrentUICulture.ToString();
             ViewData["lang"] = userLanguage;
+            ViewData["whatsapporder"] = _localizer.GetString("whatsapporder");
+            ViewData["stockno"] = _localizer.GetString("stockno"); ;
 
             await ThemeVersion();
             var query = _uow.GetRepository<Product>().GetQueryable();
-            var data = await query.Where(x => x.SeoUrl == product).Include(x => x.ProductMedias).Include(x => x.Category).SingleOrDefaultAsync();
-            var dto = _mapper.Map<ProductDto>(data);
-            return View(dto);
+            var productDto = new ProductDto();
+
+            switch (userLanguage)
+            {
+                case "tr-TR":
+                    productDto = await query
+                        .Where(x => x.SeoUrl == product)
+                        .Select(x => new ProductDto
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            Image = x.Image,
+                            Category = x.Category != null
+                                ? new CategoryDto { Name = x.Category.Name, SeoUrl = x.Category.SeoUrl }
+                                : null,
+                            Subcategory = x.Subcategory != null
+                                ? new SubcategoryDto { Name = x.Subcategory.Name }
+                                : null,
+                            StockNo = x.StockNo,
+                            SeoUrl = x.SeoUrl,
+                            Description = x.Description,
+                            ProductMedias = x.ProductMedias != null
+                                ? x.ProductMedias.Select(pm => new ProductMediaDto { Image = pm.Image }).ToList()
+                                : new List<ProductMediaDto>()
+                        })
+                        .FirstOrDefaultAsync(); 
+                    break;
+
+                case "en-US":
+                    productDto = await query
+                        .Where(x => x.SeoUrl == product)
+                        .Select(x => new ProductDto
+                        {
+                            Id = x.Id,
+                            Name = x.English,
+                            Image = x.Image,
+                            Category = x.Category != null
+                                ? new CategoryDto { Name = x.Category.English, SeoUrl = x.Category.SeoUrl }
+                                : null,
+                            Subcategory = x.Subcategory != null
+                                ? new SubcategoryDto { Name = x.Subcategory.English }
+                                : null,
+                            StockNo = x.StockNo,
+                            SeoUrl = x.SeoUrl,
+                            Description = x.DescriptionEN,
+                            ProductMedias = x.ProductMedias != null
+                                ? x.ProductMedias.Select(pm => new ProductMediaDto { Image = pm.Image }).ToList()
+                                : new List<ProductMediaDto>()
+                        })
+                        .FirstOrDefaultAsync(); 
+                    break;
+                case "ar-SA":
+                    productDto = await query
+                        .Where(x => x.SeoUrl == product)
+                        .Select(x => new ProductDto
+                        {
+                            Id = x.Id,
+                            Name = x.Arabic,
+                            Image = x.Image,
+                            Category = x.Category != null
+                                ? new CategoryDto { Name = x.Category.Arabic, SeoUrl = x.Category.SeoUrl }
+                                : null,
+                            Subcategory = x.Subcategory != null
+                                ? new SubcategoryDto { Name = x.Subcategory.Arabic }
+                                : null,
+                            StockNo = x.StockNo,
+                            SeoUrl = x.SeoUrl,
+                            Description = x.DescriptionAR,
+                            ProductMedias = x.ProductMedias != null
+                                ? x.ProductMedias.Select(pm => new ProductMediaDto { Image = pm.Image }).ToList()
+                                : new List<ProductMediaDto>()
+                        })
+                        .FirstOrDefaultAsync(); // veya SingleOrDefaultAsync
+                    break;
+                default:
+                    break;
+            }
+          
+
+            return View(productDto);
         }
 
         //[HttpGet("{category}/{subcategory}")]

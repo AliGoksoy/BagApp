@@ -28,7 +28,7 @@
             <!-- Sağ Bölüm: Ürün Bilgileri -->
             <div class="p-5 flex flex-col justify-center">
                 <h1 class="text-3xl font-bold text-gray-800 mb-4">@Model.Name</h1>
-                <p class="text-lg text-gray-600 mb-4"><strong>Stok Kodu:</strong> @Model.StockNo</p>
+                <p class="text-lg text-gray-600 mb-4"><strong>@ViewData["stockno"]:</strong> @Model.StockNo</p>
                 <p class="text-lg text-gray-600 mb-4">
                     <strong>Kategori:</strong>
                     <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(Model.Category.Name)">@Model.Category.Name</a>
@@ -41,7 +41,7 @@
                 <a href="https://api.whatsapp.com/send?phone=@TempData["Gsm"]&text=Sipariş vermek istiyorum @TempData["SiteUrl"]"
                    target="_blank"
                    class="bg-green-500 text-white py-3 px-6 rounded-lg shadow hover:bg-green-600 transition flex items-center justify-center">
-                    WhatsApp Sipariş
+                    @ViewData["whatsapporder"]
                 </a>
 
                
