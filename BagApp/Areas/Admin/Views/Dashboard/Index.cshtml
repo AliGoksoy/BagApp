@@ -1,0 +1,80 @@
+﻿
+<div class="spanel-overlay"></div>
+
+<div class="container-fluid p-4">
+  
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="dropdown d-inline-block float-right">
+                            <a asp-action="AddCategory" asp-controller="Dashboard" asp-area="Admin" class="btn btn-success text-light">Yeni</a>
+                            <a asp-action="GetCategory" asp-controller="Dashboard" asp-area="Admin" class="btn btn-warning">Tümü</a>
+                        </div>
+                        <h5 class="header-title pb-3 mt-0">Kategoriler</h5>
+                        <div class="table-responsive boxscroll" style="overflow: hidden; outline: none;" tabindex="5000">
+                            <table class="table mb-0" id="datatable">
+
+
+                                <tbody>
+                                    @foreach (CategoryDto item in ViewBag.category)
+                                    {
+                                        <tr>
+                                            <td class="border-top-0">
+                                                <div class="media">
+                                                    <img src="@Url.Content(item.Image)" alt="" class="thumb-md rounded-circle">
+                                                    <div class="media-body ml-2">
+                                                        <p class="mb-0">@item.Name <span class="badge badge-soft-danger">@item.Products.Count()</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="border-top-0 text-right"><a asp-action="UpdateCategory" asp-controller="Dashboard" asp-route-id="@item.Id" class="btn btn-light btn-sm"><i class="far fa-edit mr-2 text-success"></i>Düzenle</a></td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="dropdown d-inline-block float-right">
+                            <a asp-action="AddProduct" asp-controller="Dashboard" asp-area="Admin" class="btn btn-success text-light">Yeni</a>
+                            <a asp-action="GetProduct" asp-controller="Dashboard" asp-area="Admin" class="btn btn-warning">Tümü</a>
+                        </div>
+                        <h5 class="header-title pb-3 mt-0">Ürünler</h5>
+                        <div class="table-responsive boxscroll" style="overflow: hidden; outline: none;" tabindex="5000">
+                            <table class="table mb-0" id="datatable">
+
+
+                                <tbody>
+                                    @foreach (ProductDto item in ViewBag.product)
+                                    {
+                                        <tr>
+                                            <td class="border-top-0">
+                                                <div class="media">
+                                                    <img src="@Url.Content(item.Image)" alt="" class="thumb-md rounded-circle">
+                                                    <div class="media-body ml-2">
+                                                        <p class="mb-0">@item.Name <span class="badge badge-soft-danger">@item.Category.Name</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="border-top-0 text-right"><a asp-action="UpdateProduct" asp-controller="Dashboard" asp-route-id="@item.Id" class="btn btn-light btn-sm"><i class="far fa-edit mr-2 text-success"></i>Düzenle</a></td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

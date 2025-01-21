@@ -1,0 +1,138 @@
+
+/* Global ayarlar: Yatay kaydırmayı kaldır ve dikey kaydırmayı gizle */
+html, body {
+  margin: 0; /* Varsayılan kenar boşluklarını kaldır */
+  padding: 0; /* Varsayılan dolgu boşluklarını kaldır */
+  width: 100%; /* Tam genişlik */
+  height: 100%; /* Tam yükseklik */
+}
+
+/* Yatay scroll tamamen engellemek */
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Scroll çubuğu görsel olarak tamamen kaldırılmak istenirse */
+body::-webkit-scrollbar {
+  display: none; /* WebKit tabanlı tarayıcılar için scrollbar gizle */
+}
+
+/* Resim geçişleri için yumuşak animasyon */
+#current-slide {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Ürünlerimiz başlık stili */
+#product-list h2 {
+  letter-spacing: 1px;
+}
+
+
+/* Hover efekti */
+.product-card:hover {
+  transform: scale(1.05);
+  background-color: #ffffff; /* Beyaz kart */
+  color: #000000; /* Siyah yazı */
+}
+
+/* Animasyon tamamlandıktan sonra görünür */
+.product-card.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Yazı kısmı stil düzenlemeleri */
+#slider-text {
+  height: 2rem; /* Yazı alanının sabit yüksekliği */
+  white-space: nowrap; /* Tek satırda kalması için */
+  overflow: hidden; /* Taşan kısmı gizle */
+  text-overflow: ellipsis; /* Gerekirse üç nokta ekle */
+  display: flex; /* Esnek kutu modeli */
+  justify-content: center; /* Yatayda ortala */
+  align-items: center; /* Dikeyde ortala */
+  font-size: 1.5rem; /* Yazı boyutu */
+  line-height: 1; /* Satır yüksekliği */
+  color: #ffffff; /* Yazı rengi */
+  text-align: center; /* Ortalama */
+}
+
+
+/* Butonun içindeki aşağı işareti */
+#discover-btn i {
+  display: inline-block;
+  animation: bounce 1s infinite; /* Animasyonu tanımla */
+}
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(5px); /* Daha az hareket */
+  }
+}
+/* ----------------------------------------------------- */
+
+
+/* Hakkımızda Arka Planı */
+#about-section {
+    background: linear-gradient(to right, #fdfcfb, #e2d1c3);
+}
+
+/* Yıldızlar */
+/* Slider Hareketi */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+.menu-toggle {
+    position: fixed; /* Scroll ile sabit kalır */
+    top: 0px; /* Ekranın üst kısmından 16px boşluk */
+    right: 16px; /* Ekranın sağından 16px boşluk */
+    color: white; /* Beyaz ikon rengi */
+    z-index: 1000; /* Üstte görünmesini sağlar */
+    cursor: pointer; /* İmleç görünümü */
+    transition: background-color 0.3s ease; /* Hover animasyonu */
+    float: right; /*
+}
+
+
+
+@media (min-width: 1024px) {
+    .menu-toggle {
+        display: none; /* Büyük ekranlarda gizle */
+}
+}
+
+
+
+@media (min-width: 1024px) {
+    .menu-toggle {
+        display: none; /* Büyük ekranlarda butonu gizle */
+    }
+}
+
+
+.hc-offcanvas-nav .nav-content {
+    background: linear-gradient(to right, #1e40af, #0ea5e9, #14b8a6);
+}
+.hc-offcanvas-nav ul {
+    background: linear-gradient(to right, #1e40af, #0ea5e9, #14b8a6);
+}
+
+.hc-offcanvas-nav .nav-content h2{
+    color:#ffffff !important;
+}
+
+.hc-offcanvas-nav .nav-back a{
+    background-color: transparent !important
+}

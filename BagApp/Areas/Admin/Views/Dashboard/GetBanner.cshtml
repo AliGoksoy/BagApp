@@ -1,0 +1,83 @@
+﻿@model List<BannerDto>
+
+<div class="spanel-overlay"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+        <li class="breadcrumb-item"><a href="#">Banner</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tüm Liste</li>
+    </ol>
+</nav> <!-- Breadcrumb end -->
+<div class="container-fluid p-4">
+    <div class="card rounded-0">
+        <div class="card-header">Kategoriler</div>
+        <div class="card-body">
+            <a asp-action="AddBanner" asp-controller="Dashboard" class="btn btn-warning"><i class=" fa fa fa-plus"></i>Yeni Banner</a>
+
+            <table id="datatable" class="table mb-3 table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Görsel</th>
+                        <th scope="col">Başlık</th>   
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var banner in Model)
+                    {
+                        <tr>
+                            <td scope="row">@banner.Id</td>
+                            <td>
+                                <img width="100" height="100" src="@Url.Content(banner.Image)" alt="Alternate Text" />
+                            </td>
+                            <td>@banner.Title</td>
+                          
+                            <td>
+                                <a class="btn btn-success btn-sm" asp-action="UpdateBanner" asp-controller="Dashboard" asp-route-id="@banner.Id"><i class="fa fa-edit"></i> Düzenle</a>
+                                <a class="btn btn-danger deleteItem btn-sm" href="javascript:void(0);" data-id="@banner.Id"><i class="fa fa-times"></i> Sil</a>
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+
+    <script>
+                $('.deleteItem').click(function(e) {
+
+            e.preventDefault();
+            var $ctrl = $(this);
+            if (confirm('Silmek istediğinizden Eminmisiniz?')) {
+                $.ajax({
+                    url: '@Url.Action("RemoveBanner")',
+                    type: 'POST',
+                    data: { id: $(this).data('id') }
+                }).done(function (data) {
+                    if (data.Result == "OK") {
+                        $ctrl.closest('tr').remove();
+                        location.reload();
+                    }
+                    else if (data.Result.Message) {
+                        alert(data.Result.Message);
+                    }
+                }).fail(function () {
+                    alert("Çoklu resimleri silmeliniz. Lütfen tekrar deneyin.");
+                })
+                location.reload();
+            }
+        });
+    </script>
+}

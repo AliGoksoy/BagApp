@@ -1,0 +1,48 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = localizer.GetString(x.Name) }).ToList();
+    var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+}
+
+<!-- Language Selector (Desktop Only) -->
+<div class="relative lg:block mr-6 ml-4">
+    <form asp-action="CultureManagement" asp-controller="Home" method="post" asp-route-returnUrl="@returnUrl" class="relative">
+        <button id="language-toggle" class="px-5 py-1 bg-white rounded shadow-lg flex items-center space-x-2 cursor-pointer w-full">
+            <img src="@($"https://cdn-icons-png.flaticon.com/512/197/{(culture.RequestCulture.UICulture.Name == "tr-TR" ? "197518" : (culture.RequestCulture.UICulture.Name == "en-US" ? "197374" : "197377"))}.png")" 
+                 alt="Selected Language" id="current-flag" class="w-5 h-5 rounded-full">
+
+            <span id="selected-language" class="text-gray-600">@culture.RequestCulture.UICulture.Name</span>
+            <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+        </button>
+        <div id="language-dropdown" class="hidden absolute right-0 mt-2 bg-white rounded shadow-lg w-48">
+            @foreach (var item in cultureList)
+            {
+                <div class="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100 border-b last:border-none"
+                     onclick="this.closest('form').querySelector('[name=\'culture\']').value='@item.Value'; this.closest('form').submit();">
+                    <img src="@($"https://cdn-icons-png.flaticon.com/512/197/{(item.Value == "tr-TR" ? "197518" : (item.Value == "en-US" ? "197374" : "197377"))}.png")" class="w-5 h-5 rounded-full">
+
+                    <span class="text-gray-700">@item.Text</span>
+                </div>
+            }
+        </div>
+        <input type="hidden" name="culture" value="@culture.RequestCulture.UICulture.Name">
+    </form>
+</div>
+
+<script>
+    const toggleButton = document.getElementById('language-toggle');
+    const dropdownMenu = document.getElementById('language-dropdown');
+
+    toggleButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!toggleButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+</script>

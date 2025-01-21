@@ -1,0 +1,62 @@
+﻿@model List<CategoryDto>
+@if (Model.Count > 0)
+{
+<ul>
+    @foreach (var item in Model)
+    {
+        if (ViewData["lang"].ToString() == "tr-TR")
+        {
+
+
+            <li>
+                <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)">
+                    @item.Name
+                </a>
+                @*<ul>
+                    @foreach (var sub in item.Subcategories)
+                    {
+                        <li><a asp-action="GetSubcategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)" asp-route-subcategory="@Url.FriendlyUrl(sub.Name)">@sub.Name</a></li>
+                    }
+
+
+                </ul>*@
+            </li>
+        }
+        else if (ViewData["lang"].ToString() == "en-US")
+        {
+            <li>
+                <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)">
+                    @item.Name
+                </a>
+                @*<ul>
+                    @foreach (var sub in item.Subcategories)
+                    {
+                        <li><a asp-action="GetSubcategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)" asp-route-subcategory="@Url.FriendlyUrl(sub.Name)">@sub.English</a></li>
+                    }
+
+
+                </ul>*@
+            </li>
+        }
+        else if (ViewData["lang"].ToString() == "ar-SA")
+        {
+            <li>
+                <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)">
+                    @item.Name
+                </a>
+                @*<ul>
+                    @foreach (var sub in item.Subcategories)
+                    {
+                        <li><a asp-action="GetSubcategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)" asp-route-subcategory="@Url.FriendlyUrl(sub.Name)">@sub.Arabic</a></li>
+                    }
+
+
+                </ul>*@
+            </li>
+        }
+
+
+
+    }
+</ul>
+}

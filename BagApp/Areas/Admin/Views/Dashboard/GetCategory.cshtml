@@ -1,0 +1,111 @@
+﻿@model List<CategoryDto>
+
+<div class="spanel-overlay"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+        <li class="breadcrumb-item"><a href="#">Kategoriler</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tüm Liste</li>
+    </ol>
+</nav> <!-- Breadcrumb end -->
+<div class="container-fluid p-4">
+    <div class="card rounded-0">
+        <div class="card-header">Kategoriler</div>
+        <div class="card-body">
+            <a asp-action="AddCategory" asp-controller="Dashboard" class="btn btn-warning"><i class=" fa fa fa-plus"></i>Yeni Kategori</a>
+
+            <table id="datatable" class="table mb-3 table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Görsel</th>
+                        <th scope="col">Kategori Adı</th>
+                        <th scope="col">Durumu</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var category in Model)
+                    {
+                    <tr>
+                        <td scope="row">@category.Id</td>
+                        <td class="border-top-0">
+                            <div class="media">
+                                <img width="100" height="100" src="@Url.Content(category.Image)" alt="Alternate Text" />
+                                <div class="media-body ml-2">
+                                    <p class="mb-0">@category.Name <span class="badge badge-soft-danger">@category.Products.Count()</span></p>
+                                </div>
+                            </div>
+                          
+                        </td>
+                        <td>@category.Name</td>
+                        <td>
+                            @if (category.Stat == true)
+                            {
+                                <div class="checkbox-slider--b checkbox-slider-md checkbox-slider-success">
+                                    <label>
+                                        <input type="checkbox" checked><span>Aktif</span>
+                                    </label>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="checkbox-slider--b checkbox-slider-md checkbox-slider-danger">
+                                    <label>
+                                        <input type="checkbox" checked><span>Pasif</span>
+                                    </label>
+                                </div>
+                            }
+                        </td>
+                        <td class="border-top-0 text-right">
+                            <a asp-action="UpdateCategory" asp-controller="Dashboard" asp-route-id="@category.Id" class="btn btn-light btn-sm"><i class="far fa-edit mr-2 text-success"></i>Düzenle</a>
+
+                            <a class="btn btn-danger deleteItem btn-sm" href="javascript:void(0);" data-id="@category.Id"><i class="fa fa-times"></i> Sil</a>
+
+                        </td>
+                   
+                    </tr>
+                    }
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+
+    <script>
+                $('.deleteItem').click(function(e) {
+
+            e.preventDefault();
+            var $ctrl = $(this);
+            if (confirm('Silmek istediğinizden Eminmisiniz?')) {
+                $.ajax({
+                    url: '@Url.Action("RemoveCategory")',
+                    type: 'POST',
+                    data: { id: $(this).data('id') }
+                }).done(function (data) {
+                    if (data.Result == "OK") {
+                        $ctrl.closest('tr').remove();
+                        location.reload();
+                    }
+                    else if (data.Result.Message) {
+                        alert(data.Result.Message);
+                    }
+                }).fail(function () {
+                    alert("Çoklu resimleri silmeliniz. Lütfen tekrar deneyin.");
+                })
+                location.reload();
+            }
+        });
+    </script>
+}

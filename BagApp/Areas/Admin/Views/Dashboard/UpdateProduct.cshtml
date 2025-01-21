@@ -1,0 +1,243 @@
+﻿@model ProductDto
+
+<div class="spanel-overlay"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+        <li class="breadcrumb-item"><a href="#">Ürünler</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</nav> <!-- Breadcrumb end -->
+<div class="container-fluid p-4">
+    <form asp-action="UpdateProduct" asp-controller="Dashboard" method="post" class="spanel-form" enctype="multipart/form-data">
+        <div class="row">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Image" />
+
+            <div class="col-md-6 col-sm-12">
+                <!-- card-columns spanel-card-columns -->
+                <div class="card portlet rounded-0">
+                    <div class="card-header">
+                        Ürün Yönetimi # <code>@Model.Name</code>
+
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+                            <div class="form-group spanel-form-group select2 required">
+                                <span class="text-danger" asp-validation-for="@Model.CategoryId"></span>
+                                <label>Kategori</label> <small class="form-text text-muted"></small>
+                                <div class="clearfix"></div>
+                                <select id="CategoryId" asp-for="@Model.CategoryId" asp-items="@ViewBag.category" class="form-control spanel-select2">
+                                    <option>Kategori Seç</option>
+
+                                </select>
+                            </div>
+                            @*<div class="form-group spanel-form-group select2 required">
+                                <span class="text-danger" asp-validation-for="@Model.SubcategoryId"></span>
+                                <label>Alt Kategori</label> <small class="form-text text-muted"></small>
+                                <div class="clearfix"></div>
+                                <select id="SubcategoryId" asp-for="@Model.SubcategoryId" class="form-control spanel-select2">
+                                    <option value="@Model.SubcategoryId">@Model.Subcategory.Name</option>
+
+                                </select>
+                            </div>*@
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                                        <label>Ürün Adı</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="Name" class="form-control" placeholder="Ürün Adı">
+                                    </div>
+                                 
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.StockNo"></span>
+                                        <label>Stok No</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="StockNo" class="form-control" placeholder="Stok No">
+                                    </div>
+                                    <div class="form-group spanel-form-group">
+                                        <label>Seo Açıklaması</label> <small class="form-text text-muted"></small>
+                                        <input asp-for="SeoDescription" type="text" class="form-control" placeholder="Seo Açıklaması">
+                                    </div>
+                                    <div class="form-group spanel-form-group">
+                                        <code>Örnek: anahtar1,anahtar2</code>
+                                        <label>Seo Anahtarı</label> <small class="form-text text-muted"></small>
+                                        <input asp-for="Keywords" type="text" class="form-control" placeholder="Seo Anahtarı">
+                                    </div>
+                                </div>
+                 
+                                   
+                            
+
+                               
+
+                            </div>
+                           
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="mb-2">Anasayfa</div>
+                                    <div class="checkbox-slider--a checkbox-slider-md">
+                                        <label>
+                                            <input asp-for="Home" type="checkbox"><span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="mb-2">Durum</div>
+                                    <div class="checkbox-slider--a checkbox-slider-md">
+                                        <label>
+                                            <input asp-for="Stat" type="checkbox"><span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                              
+
+                                <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                    <div class="fileinput-preview img-thumbnail mb-1" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                        <img src="@Url.Content(Model.Image)" alt="">
+                                    </div>
+                                    <div>
+                                        <span class="btn-file">
+                                            <span class="btn btn-outline-secondary fileinput-new">Resim Seç</span>
+                                            <span class="btn btn-outline-secondary fileinput-exists">Değiştir</span>
+                                            <input type="file" name="Image">
+                                        </span>
+                                        <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Sil</a>
+                                    </div>
+                                </div>
+
+                                <div class="fileinput-new input-group mb-3" data-provides="fileinput">
+                                    <div class="form-control float-left" data-trigger="fileinput">
+                                        <i class="fa fa-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <div class="input-group-addon btn-file">
+                                        <span class="btn btn-outline-secondary fileinput-new" type="button">Çoklu Dosya Seç</span>
+                                        <span class="btn btn-outline-secondary fileinput-exists" type="button">Değiştir</span>
+                                        <input type="file" name="file" multiple="multiple">
+                                    </div>
+                                    <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Sil</a>
+                                </div>
+
+                                @foreach (ProductMediaDto item in ViewBag.Media)
+                                {
+                                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                        <div class="fileinput-preview img-thumbnail mb-1" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                            <img src="@Url.Content(item.Image)" alt="">
+                                        </div>
+                                        <div>
+
+                                            <a href="javascript:void(0);" data-id="@item.Id" class="btn btn-outline-danger fileinput-exists deleteItem" data-dismiss="fileinput"><i class=" fa fa-trash"></i> Sil</a>
+                                        </div>
+                                    </div>
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+
+
+                            <a asp-action="GetProduct" asp-controller="Dashboard" class="btn btn-warning">Vazgeç</a>
+
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div> <!-- portlet div end -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card portlet rounded-0">
+                    <div class="card-header">
+                        Ürün Açıklaması
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <textarea asp-for="Description" id="fulltinymce" cols="30" rows="10"></textarea>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+             
+               
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+@section Scripts{
+
+
+
+    <script>
+                $('.deleteItem').click(function(e) {
+
+            e.preventDefault();
+            var $ctrl = $(this);
+            if (confirm('Silmek istediğinizden Eminmisiniz?')) {
+                $.ajax({
+                    url: '@Url.Action("RemoveMedia")',
+                    type: 'POST',
+                    data: { id: $(this).data('id') }
+                }).done(function (data) {
+                    if (data.Result == "OK") {
+                        $ctrl.closest('tr').remove();
+                        location.reload();
+                    }
+                    else if (data.Result.Message) {
+                        alert(data.Result.Message);
+                    }
+                }).fail(function () {
+                    alert("Çoklu resimleri silmeliniz. Lütfen tekrar deneyin.");
+                })
+                location.reload();
+            }
+                });
+
+         $(function () {
+
+                  $("#CategoryId").change(function () {
+                      var url = '@Url.Content("~/")' +"Admin/Dashboard/GetSubCategoryId";
+                      var categoryId = "#CategoryId";
+                      $.getJSON(url, { CategoryId: $(categoryId).val() }, function (data) {
+                    var items = '';
+                    $("#SubcategoryId").empty();
+                    $.each(data, function (i, row) {
+                        items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                    });
+                          $("#SubcategoryId").html(items);
+
+                })
+
+
+                })
+
+            })
+    </script>
+}

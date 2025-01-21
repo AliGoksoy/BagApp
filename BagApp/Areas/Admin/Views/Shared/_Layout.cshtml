@@ -1,0 +1,327 @@
+﻿<!doctype html>
+<html lang="tr">
+<head>
+    <title>@TempData["CompanyName"]</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/plugins/bootstrapv4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/titatoggle/css/titatoggle-min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome512/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome512/css/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/perfectscrollbar/css/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/assets/plugins/jqueryuiv112/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/plugins/timeline/css/timeline.css">
+    <link rel="stylesheet" href="~/assets/spanel/css/spanel.css">
+    <link rel="stylesheet" href="~/assets/plugins/jasnyv313/css/jasny-bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/datatable/css/datatables.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/datatable/buttons/css/buttons.bootstrap4.min.css">
+
+</head>
+<body>
+    <div id="wrap" class="sidebar-active">
+        <div class="sidebar">
+
+       
+            <div class="sidebar-nav">
+                <ul class="nav flex-column" id="sidebarnav">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Index" asp-controller="Dashboard" asp-area="Admin">
+                            <span class="title">İlkeWeb</span>
+                            <span class="detail">Anasayfa</span>
+                        </a>
+                        <i class="fa fa-home"></i>
+                    </li>
+
+
+                    <li class="nav-item submenu ">
+                        <a class="nav-link">
+                            <span class="title">Kategoriler</span>
+                        </a>
+                        <i class="fa fa-list"></i>
+                        <ul class="collapse" role="tabpanel" data-parent="#sidebarnav">
+                            <li>
+                                <a asp-action="GetCategory" asp-controller="Dashboard" asp-area="Admin">Tüm Kategoriler</a>
+                            </li>
+                            <li>
+                                <a asp-action="AddCategory" asp-controller="Dashboard" asp-area="Admin">Yeni Kategori</a>
+                            </li>
+                            @*<li>
+                                <a asp-action="GetSubcategory" asp-controller="Dashboard" asp-area="Admin">Alt Kategoriler</a>
+                            </li>
+                            <li>
+                                <a asp-action="AddSubcategory" asp-controller="Dashboard" asp-area="Admin">Yeni Alt Kategori</a>
+                            </li>*@
+
+                        </ul>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link">
+                            <span class="title">Ürünler</span>
+                        </a>
+                        <i class="fa fa-list-ol"></i>
+                        <ul class="collapse" role="tabpanel" data-parent="#sidebarnav">
+                            <li>
+                                <a asp-action="GetProduct" asp-controller="Dashboard" asp-area="Admin">Tüm Ürünler</a>
+                            </li>
+                            <li>
+                                <a asp-action="AddProduct" asp-controller="Dashboard" asp-area="Admin">Yeni Ürün</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link">
+                            <span class="title">Banner</span>
+                        </a>
+                        <i class="fa fa-image"></i>
+                        <ul class="collapse" role="tabpanel" data-parent="#sidebarnav">
+                            <li>
+                                <a asp-action="GetBanner" asp-controller="Dashboard" asp-area="Admin">Tüm Liste</a>
+                            </li>
+                            <li>
+                                <a asp-action="AddBanner" asp-controller="Dashboard" asp-area="Admin">Yeni Banner</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link">
+                            <span class="title">Referans</span>
+                        </a>
+                        <i class="fa fa-image"></i>
+                        <ul class="collapse" role="tabpanel" data-parent="#sidebarnav">
+                            <li>
+                                <a asp-action="GetReference" asp-controller="Dashboard" asp-area="Admin">Tüm Liste</a>
+                            </li>
+                            <li>
+                                <a asp-action="AddReference" asp-controller="Dashboard" asp-area="Admin">Yeni Referans</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item submenu">
+                        <a class="nav-link">
+                            <span class="title">SSS</span>
+                        </a>
+                        <i class="fa fa-image"></i>
+                        <ul class="collapse" role="tabpanel" data-parent="#sidebarnav">
+                            <li>
+                                <a asp-action="GetQuestion" asp-controller="Dashboard" asp-area="Admin">Tüm Liste</a>
+                            </li>
+                            <li>
+                                <a asp-action="AddQuestion" asp-controller="Dashboard" asp-area="Admin">Yeni Soru</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="PasswordUpdate" asp-controller="Dashboard" class="nav-link">
+                            <span class="title">Şifre Değiştir</span>
+                        </a>
+                        <i class="fa fa-key"></i>
+
+                    </li>
+
+
+                    @if (@Context.Session.GetString("Role") == "Super")
+                    {
+                        <li class="nav-item submenu">
+
+                            <a class="nav-link">
+                                <span class="title">Tema</span>
+                            </a>
+                            <i class="fa fa-wrench"></i>
+                            <ul class="collapse" role="tabpanel" data-parent="#sidebarnav">
+                                <li>
+                                    <a asp-action="ThemeUpdate" asp-controller="Setting" asp-area="Admin">Ayarlar</a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                    }
+
+
+
+                </ul>
+            </div> <!-- sidebar-nav div end -->
+            <div class="sidebar-footer">
+                <img src="~/logo-ilke.png" />
+                <span>Copyright  &copy; @DateTime.Now.Year</span>
+                <a class="logout" asp-action="Logout" asp-controller="Account" asp-area="Authorize" data-toggle="tooltip" data-placement="left" title="Çıkış Yap"><i class="fa fa-power-off fa-2x"></i></a>
+                <div class="clearfix"></div>
+            </div> <!-- sidebar footer div end -->
+        </div> <!-- sidebar div end -->
+        <div class="header">
+            <div class="float-left">
+                <div class="letterS">
+                    <a asp-action="Index" asp-controller="Dashboard">
+                        <img width="40" height="40" src="~/assets/spanel/img/favicon.png" />
+
+                    </a>
+                </div>
+                <div class="menu-link-wrapper">
+                    <div class="menu-link menu-trigger-open">
+                        <span class="lines"></span>
+                    </div>
+                </div>
+                <div class="see-site float-left"><a href="~/" target="_blank" class="animated-hover faa-parent" data-toggle="tooltip" data-placement="bottom" title="Siteyi Görüntüle"><i class="fa fa-globe faa-pulse"></i></a></div>
+                <div class="full-screen full-screen-open float-left ml-2"><a href="#" class="animated-hover faa-parent" data-toggle="tooltip" data-placement="bottom" title="Full Screen"><i class="fa fa-expand faa-pulse"></i></a></div>
+                <div class="full-screen full-screen-close float-left ml-2"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Normal Screen"><i class="fa fa fa-compress"></i></a></div>
+            </div>
+            <div class="float-right">
+                <div class="dropdown messages-dropdown float-left">
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesdropdown">
+                        <h6 class="dropdown-header">Ayarlar</h6>
+                        <ul class="notifications-box">
+                            <li>
+                                <span class="notification-text text-primary"> 1. Bildirim  Bulunmuyor</span>
+                                <div class="notification-time">
+                                    1 kaç saniye önce
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+
+                        </ul>
+                        <div class="dropdown-footer text-center"><a href="#" class="btn btn-danger btn-sm">Tüm Mesajları Gör</a></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+          
+            <div class="clearfix"></div>
+
+
+        </div> <!-- header div end -->
+        <div class="content">
+            @RenderBody()
+        </div> <!-- content div end -->
+    </div> <!-- wrap div end -->
+
+    <script src="~/assets/plugins/jqueryv321/jquery-3.2.1.min.js"></script>
+    <script src="~/assets/plugins/bootstrapv4/js/popper.min.js"></script>
+    <script src="~/assets/plugins/bootstrapv4/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/perfectscrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="~/assets/plugins/jqueryfullscreen/jquery.fullscreen.min.js"></script>
+    <script src="~/assets/plugins/jqueryuiv112/jquery-ui.js"></script>
+    <script src="~/assets/plugins/pace/js/pace.min.js"></script>
+    <script src="~/assets/spanel/js/portlet.js"></script>
+    <script src="~/assets/plugins/tinymcev479/tinymce.min.js"></script>
+    <script src="~/assets/plugins/datatable/js/datatables.min.js"></script>
+    <script src="~/assets/plugins/datatable/buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/plugins/datatable/buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/plugins/datatable/buttons/js/jszip.min.js"></script>
+    <script src="~/assets/plugins/datatable/buttons/js/pdfmake.min.js"></script>
+    <script src="~/assets/plugins/datatable/buttons/js/vfs_fonts.js"></script>
+    <script src="~/assets/plugins/datatable/buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/spanel/js/spanel.js"></script>
+    <script src="~/assets/plugins/jasnyv313/js/jasny-bootstrap.min.js"></script>
+
+
+    <script>
+
+
+        tinymce.init({
+            selector: 'textarea#basictinymce',
+            theme: 'modern',
+            language: 'tr'
+        });
+        tinymce.init({
+            selector: 'textarea#basictinymceEn',
+            theme: 'modern',
+            language: 'tr'
+        });
+        tinymce.init({
+            selector: 'textarea#basictinymceAr',
+            theme: 'modern',
+            language: 'tr'
+        });
+        tinymce.init({
+            selector: 'textarea#fulltinymce',
+            theme: 'modern',
+            language: 'tr'
+        });
+        tinymce.init({
+            selector: 'textarea#fulltinymceEn',
+            theme: 'modern',
+            language: 'tr'
+        });
+        tinymce.init({
+            selector: 'textarea#fulltinymceAr',
+            theme: 'modern',
+            language: 'tr'
+        });
+
+
+
+
+
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "dom": "<'row'<'col-sm-12 text-right mb-3'B>><'row'<'col-sm-6'l><'col-sm-6'f>>rtip",
+                buttons: {
+                    name: 'primary',
+                    buttons: [
+                        { extend: 'excelHtml5', className: 'btn btn-secondary btn-sm', text: 'Excel' },
+                        { extend: 'pdfHtml5', className: 'btn btn-success btn-sm', text: 'PDF <i class="fa fa-file-pdf-o"></i>' },
+                        {
+                            extend: 'print', className: 'btn btn-danger btn-sm', text: 'Yazdır <i class="fa fa-print"></i>',
+                            customize: function (win) {
+                                $(win.document.body)
+                                    .css('font-size', '10pt')
+                                    .prepend(
+                                        '<img src="http://ibb.co/heqCb7" style="position:absolute; top:0; left:0;" />'
+                                    );
+                                $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                            }
+                        }
+                    ]
+                },
+                "lengthMenu": [[1, 10, 25, 50, 100, -1], [1, 10, 25, 50, 100, "Hepsi"]],
+                "iDisplayLength": 10,
+                "pagingType": "full_numbers",
+                "language": {
+                    "sDecimal": ",",
+                    "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                    "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                    "sInfoEmpty": "Kayıt yok",
+                    "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                    "sLoadingRecords": "Yükleniyor...",
+                    "sProcessing": "İşleniyor...",
+                    "sSearch": "Ara:",
+                    "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                    "oPaginate": {
+                        "sFirst": "İlk",
+                        "sLast": "Son",
+                        "sNext": "Sonraki",
+                        "sPrevious": "Önceki"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                        "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                    }
+                }
+            });
+
+            $('.dataTables_length select').select2({
+                theme: "bootstrap",
+                selectOnClose: true,
+                language: "tr"
+            });
+
+            $('.dataTables_wrapper .dt-buttons').addClass('btn-group');
+
+
+        });
+    </script>
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", false)
+</body>
+</html>

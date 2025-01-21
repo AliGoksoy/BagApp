@@ -1,0 +1,228 @@
+﻿<!doctype html>
+<html lang="tr">
+<head>
+    <title>Kullanıcı Girişi</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/plugins/bootstrapv4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome512/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/particle/css/style.css">
+    <link rel="stylesheet" href="~/assets/plugins/titatoggle/css/titatoggle-min.css">
+    <link rel="stylesheet" href="~/assets/spanel/css/spanel.css">
+</head>
+<body class="h-100">
+    <div id="particles-js" style="position: absolute;"></div>
+    <div class="container h-100">
+        <div class="row modal-dialog-centered">
+            <div class="col-md-4 col-sm-8 mx-auto">
+               
+                <h4 class="d-block text-center text-white" style="font-size: 35px;">Yönetim Paneli</h4>
+
+                <img src="/logo-admin.png" alt="Spanel" class="img-fluid d-block mx-auto mt-2" style="max-height: 100px; position: relative; z-index: 2;">
+                <div class="card rounded-0" style="position: relative; z-index: 1; top: -40px;">
+                    <div class="card-header">
+                        <span style="font-size: 20px; font-weight: 500;" class="text-spanel">Giriş</span>
+                    </div>
+                    <div class="card-body">
+                        <form action="~/Authorize/Account/SignIn" method="post" class="required">
+                            <div class="form-group spanel-form-group required">
+                                <label>Kullanıcı Adı</label>
+                                @if (ViewBag.Error!=null)
+                                {
+                                    <span>@ViewBag.Error</span>
+                                }
+                                <input type="text" name="UserName" class="form-control" required placeholder="Kullanıcı Adınız">
+                            </div>
+
+                            <div class="form-group spanel-form-group required">
+                                <label>Şifre</label>
+                                <input type="password" name="Password" class="form-control" required placeholder="Şifre">
+                            </div>
+
+                            <div class="form-group spanel-form-group clearfix pt-2 pb-2">
+                                <div class="checkbox-slider--b checkbox-slider-md checkbox-slider-danger">
+                                    <label>
+                                        <input type="checkbox"><span>Beni Hatırla</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Giriş Yap" class="btn btn-spanel rounded-0 btn-block">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer" style="line-height: 35px;">
+                        <img src="~/assets/spanel/img/favicon.png" alt="İlkeWeb" class="img-fluid float-left" style="max-height: 35px;">
+                        <span class="float-left ml-1">İlkeweb &copy; @DateTime.Now.Year</span>
+                        <span class="float-right" data-toggle="tooltip" data-placement="top" title="İlkeWeb">
+                          Tasarım
+                        </span>
+                    </div>
+                </div>
+
+               
+
+
+
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/plugins/jqueryv321/jquery-3.2.1.min.js"></script>
+    <script src="~/assets/plugins/bootstrapv4/js/popper.min.js"></script>
+    <script src="~/assets/plugins/bootstrapv4/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/particle/js/particles.min.js"></script>
+    <script src="~/assets/plugins/jqueryvalidationv1170/jquery.validate.min.js"></script>
+    <script src="~/assets/plugins/jqueryvalidationv1170/localization/messages_tr.js"></script>
+    <script src="~/assets/spanel/js/spanel.js"></script>
+    <script>
+
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            template:'<div class="tooltip spanel-tooltip" role="tooltip"><div class="arrow"></div><div class="tooltip-inner bg-danger text-white"></div></div>',
+            html:true,
+        });
+    })
+
+    $('form.required').validate({
+        errorElement: "div",
+        errorPlacement: function ( error, element ) {
+            if ( element.prop( "type" ) === "radio" || element.prop( "type" ) === "checkbox") {
+                error.insertAfter( element.parents().eq(1) );
+            } else {
+                error.insertAfter( element );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+        }
+    });
+
+    particlesJS('particles-js',
+
+        {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true,
+            "config_demo": {
+                "hide_card": false,
+                "background_color": "#2b303b",
+                "background_image": "",
+                "background_position": "50% 50%",
+                "background_repeat": "no-repeat",
+                "background_size": "cover"
+            }
+        }
+
+    );
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿@model ReferenceDto
+<div class="spanel-overlay"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+   
+        <li class="breadcrumb-item"><a href="#">Referans</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Yeni Referans</li>
+    </ol>
+</nav> <!-- Breadcrumb end -->
+
+<div class="container-fluid p-4">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <!-- card-columns spanel-card-columns -->
+            <div class="card portlet rounded-0">
+                <div class="card-header">
+                    Refarans Yönetimi # <code>Yeni Refarans Girişi</code>
+                    Boyut : 500x500 px
+                </div>
+                <div class="collapse show">
+                    <div class="card-body">
+                        <form asp-action="AddReference" asp-controller="Dashboard" method="post" class="spanel-form" enctype="multipart/form-data">
+
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="Title"></span>
+                                        <label>Başlık</label> <small class="form-text text-muted"></small>
+                                        <input asp-for="Title" type="text" class="form-control" placeholder="Banner Adı">
+                                    </div>
+
+
+                                </div>
+                                
+                            </div>
+               
+
+                            <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                <div class="fileinput-preview img-thumbnail mb-1" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                    <img src="~/Uploads/no-image.png" alt="">
+                                </div>
+                                <div>
+                                    <span class="btn-file">
+                                        <span class="btn btn-outline-secondary fileinput-new">Resim Seç</span>
+                                        <span class="btn btn-outline-secondary fileinput-exists">Değiştir</span>
+                                        <input type="file" name="Image">
+                                    </span>
+                                    <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Sil</a>
+                                </div>
+                            </div>
+
+
+                            <a asp-action="GetReference" asp-controller="Dashboard" class="btn btn-warning">Vazgeç</a>
+
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- portlet div end -->
+        </div>
+
+    </div>
+
+</div>

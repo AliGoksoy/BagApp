@@ -1,0 +1,100 @@
+﻿@{
+    Layout = null;
+}
+<html lang="en-us">
+
+<head>
+    <title>Balakan Flower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.min.css">
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" type="text/css" href="~/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/owl-carousel/owl.carousel.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/vendor/sticky-icon/stickyicon.css">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" type="text/css" href="~/css/style.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <!-- End Header -->
+        <main class="main">
+
+            <!-- End PageHeader -->
+            <div class="page-content banner-page banner-element ">
+
+
+                <section>
+
+                    <div class="banner banner-background  text-center cs-banner" data-option="{'offset': -60}">
+                        <div class="container-fluid cs-bg">
+                            <div class="banner-content appear-animate" data-animation-options="{'name': 'blurIn', 'duration': '1s', 'delay': '.2s'}">
+                                <img src="~/images/logo.png" width="200" height="200" alt="Alternate Text" />
+                                <ul>
+
+                                    <li>
+                                        <img src="~/images/turkey.png" alt="Alternate Text" />
+                                        <form asp-action="CultureManagement" asp-controller="Home" method="post" asp-route-returnUrl="~/anasayfa">
+
+                                            <input type="hidden" name="culture" value="tr-TR" />
+
+                                            <button type="submit" class="btn">Türkçe</button>
+
+                                        </form>
+
+
+                                    </li>
+                                    <li>
+
+                                        <img src="~/images/english.png" alt="Alternate Text" />
+                                        <form asp-action="CultureManagement" asp-controller="Home" method="post" asp-route-returnUrl="~/anasayfa">
+
+                                            <input type="hidden" name="culture" value="en-US" />
+
+                                            <button type="submit" class="btn">English</button>
+
+                                        </form>
+
+
+                                    </li>
+                                    <li>
+
+                                        <img src="~/images/arabic.png" alt="Alternate Text" />
+                                        <form asp-action="CultureManagement" asp-controller="Home" method="post" asp-route-returnUrl="~/anasayfa">
+
+                                            <input type="hidden" name="culture" value="ar-SA" />
+
+                                            <button type="submit" class="btn">Arabic</button>
+
+                                        </form>
+
+
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </main>
+        <!-- End Main -->
+        <!-- End Footer -->
+    </div>
+
+    <!-- Plugins JS File -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/parallax/parallax.min.js"></script>
+    <script src="~/vendor/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/vendor/codemirror/codemirror.min.js"></script>
+    <script src="~/vendor/popup-code/popcode.min.js"></script>
+    <script src="~/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Main JS File -->
+    <script src="~/js/main.min.js"></script>
+</body>
+</html>

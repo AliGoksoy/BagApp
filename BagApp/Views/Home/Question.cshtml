@@ -1,0 +1,80 @@
+﻿@model List<QuestionDto>
+<main class="main">
+    <div class="page-content">
+        <div class="container mt-5">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 mt-10 mb-3">
+                            <h2 class="title pl-2 pr-2 ls-m text-center">SSS</h2>
+                            <div class="accordion accordion-border accordion-boxed accordion-plus">
+                                @foreach (var item in Model)
+                                {
+
+                                    @if (ViewData["lang"].ToString() == "tr-TR")
+                                    {
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a href="#collapse1-1" class="collapse">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                            <div id="collapse1-1" class="collapsed">
+                                                <div class="card-body">
+                                                    <p>
+                                                        @Html.Raw(item.Description)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (ViewData["lang"].ToString() == "en-US")
+                                    {
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a href="#collapse1-1" class="collapse">
+                                                    @item.TitleEn
+                                                </a>
+                                            </div>
+                                            <div id="collapse1-1" class="collapsed">
+                                                <div class="card-body">
+                                                    <p>
+                                                        @Html.Raw(item.DescriptionEn)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (ViewData["lang"].ToString() == "ar-SA")
+                                    {
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a href="#collapse1-1" class="collapse">
+                                                    @item.TitleAr
+                                                </a>
+                                            </div>
+                                            <div id="collapse1-1" class="collapsed">
+                                                <div class="card-body">
+                                                    <p>
+                                                        @Html.Raw(item.DescriptionAr)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+</main>

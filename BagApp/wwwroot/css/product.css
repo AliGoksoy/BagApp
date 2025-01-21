@@ -1,0 +1,243 @@
+/* Global ayarlar: Yatay kaydırmayı kaldır ve dikey kaydırmayı gizle */
+html, body {
+    margin: 0; /* Varsayılan kenar boşluklarını kaldır */
+    padding: 0; /* Varsayılan dolgu boşluklarını kaldır */
+    width: 100%; /* Tam genişlik */
+    height: 100%; /* Tam yükseklik */
+  }
+  
+  /* Yatay scroll tamamen engellemek */
+  body {
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Scroll çubuğu görsel olarak tamamen kaldırılmak istenirse */
+  body::-webkit-scrollbar {
+    display: none; /* WebKit tabanlı tarayıcılar için scrollbar gizle */
+  }
+
+  .animate-gradient {
+    background: linear-gradient(90deg, #1e293b, #334155, #1e293b);
+    background-size: 300% 300%;
+    animation: gradient-move 8s ease infinite;
+  }
+
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
+  .perspective {
+    perspective: 1000px;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+
+
+
+
+  }
+
+
+
+/* Büyük Görsel */
+/* Büyük Görsel */
+#main-image {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Küçük Görseller */
+.flex.justify-center img {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    width: 80px; /* Küçük görsel genişliği */
+    height: 80px; /* Küçük görsel yüksekliği */
+    object-fit: cover; /* Görseller düzgün kesilir */
+}
+
+    .flex.justify-center img:hover {
+        transform: scale(1.1); /* Hover ile büyüme efekti */
+    }
+
+/* Küçük Görseller */
+.flex.space-x-4 img {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+    .flex.space-x-4 img:hover {
+        transform: scale(1.05);
+    }
+
+/* Ürün Başlığı */
+#product-title {
+    color: #2d3748; /* Tailwind'in "gray-800" rengi */
+    font-size: 1.875rem; /* 3xl */
+    font-weight: bold;
+}
+
+/* Ürün Açıklaması */
+#product-description {
+    color: #718096; /* Tailwind'in "gray-600" rengi */
+    line-height: 1.6;
+}
+/* Büyük Görsel */
+.swiper-container img {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Küçük Görseller */
+.flex img {
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .flex img:hover {
+        transform: scale(1.1);
+    }
+
+/* Büyük Görsel */
+/* Konteyner ve Grid */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Swiper Stilleri */
+.swiper-container {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Swiper Button */
+.swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.swiper-pagination {
+    bottom: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Ürün Bilgi Alanı */
+.product-info {
+    padding: 20px;
+}
+
+    .product-info h1 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .product-info p {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+        .product-info p span {
+            font-weight: bold;
+            color: #333;
+        }
+
+/* Buton */
+.button-primary {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+    .button-primary:hover {
+        background-color: #e55a00;
+    }
+
+/* Başarı Mesajı */
+.success-message {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #28a745;
+    display: none; /* Varsayılan olarak gizli */
+}
+
+    .success-message.show {
+        display: block;
+    }
+
+
+/* Pagination'ın sola hizalanması */
+.swiper-pagination {
+    left: 10px;
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.swiper-pagination-bullet {
+    background-color: #ff6a00; /* Turuncu renkte pagination */
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #e55a00; /* Daha koyu turuncu aktif rengi */
+}

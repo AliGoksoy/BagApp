@@ -1,0 +1,20 @@
+
+/* Global ayarlar: Yatay kaydırmayı kaldır ve dikey kaydırmayı gizle */
+html, body {
+    margin: 0; /* Varsayılan kenar boşluklarını kaldır */
+    padding: 0; /* Varsayılan dolgu boşluklarını kaldır */
+    width: 100%; /* Tam genişlik */
+    height: 100%; /* Tam yükseklik */
+  }
+  
+  /* Yatay scroll tamamen engellemek */
+  body {
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Scroll çubuğu görsel olarak tamamen kaldırılmak istenirse */
+  body::-webkit-scrollbar {
+    display: none; /* WebKit tabanlı tarayıcılar için scrollbar gizle */
+  }
+

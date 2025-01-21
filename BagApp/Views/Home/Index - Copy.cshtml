@@ -1,0 +1,125 @@
+﻿
+
+
+<!-- Hero Section -->
+<section class="relative h-[80vh] flex flex-col items-center justify-center bg-gray-100">
+    <!-- Slider Container -->
+    <div id="slider-container"
+         class="absolute inset-0 overflow-hidden flex items-center justify-center">
+        <img id="current-slide"
+             src="~/images/slider/image1.jpg"
+             alt="Slider Image"
+             class="h-full mt-24 w-auto max-w-full object-contain transition-opacity duration-1000" />
+
+        <!-- Gizli Görseller -->
+        <div id="hidden-images" class="hidden">
+            @foreach (BannerDto item in ViewBag.Banner)
+            {
+                <img src="@Url.Content(item.Image)" alt="@item.Title" />
+            }
+
+
+
+        </div>
+    </div>
+
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+
+
+    <div class="relative z-10 h-full flex flex-col justify-center items-center text-white text-center px-4">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] mb-6"
+            data-anim="title">
+
+     
+            Looks Kids: @Localizer["info"]
+        </h1>
+        <a href="#featured-products"
+           id="discover-btn"
+           class="mt-8 sm:mt-12 relative flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white font-bold text-sm sm:text-lg rounded-full shadow-lg hover:scale-105 transition-transform">
+            <span class="mr-2">@Localizer["discover"]</span>
+            <i class="fa-solid fa-angle-down"></i>
+        </a>
+    </div>
+
+    <!-- Social Links -->
+    <div class="absolute top-1/2 right-4 sm:right-6 transform -translate-y-1/2 space-y-3 sm:space-y-4 hidden sm:block">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/lookskids12/"
+           class="block bg-yellow-500 text-black p-2 sm:p-3 rounded-full shadow-lg hover:bg-white hover:text-yellow-500 hover:rotate-3 transition duration-300">
+            <i class="fab fa-instagram"></i><i class="ml-2 hidden sm:inline">lks_looks_kids</i>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/lookskids"
+           class="block bg-yellow-500 text-black p-2 sm:p-3 rounded-full shadow-lg hover:bg-white hover:text-yellow-500 hover:rotate-3 transition duration-300">
+            <i class="fab fa-facebook"></i><i class="ml-2 hidden sm:inline">lks_looks_kids</i>
+        </a>
+        <!-- Trendyol -->
+        <a href="https://www.trendyol.com/magaza/looks-kids-m-248359?sst=0"
+           class="block bg-yellow-500 text-black px-3 py-2 sm:px-4 sm:py-2 rounded-lg shadow-lg hover:bg-white hover:text-yellow-500 hover:rotate-3 transition duration-300 flex items-center space-x-2">
+            <i class="fab fa-shopify"></i>
+            <span class="hidden sm:inline">Trendyol Mağazamız</span>
+        </a>
+    </div>
+
+    <!-- Categories -->
+    <div id="product-list"
+         class="absolute left-4 top-1/4 space-y-3 hidden sm:block">
+        <h2 class="text-lg sm:text-2xl font-bold text-gray-600 mb-2 sm:mb-4 border-b-2 border-yellow-500 inline-block pb-1">
+            @Localizer["product"]
+        </h2>
+        @foreach (CategoryDto item in ViewBag.Category)
+        {
+            <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Name)"
+               class="product-card bg-yellow-500 text-gray-600 shadow-md px-3 py-2 sm:px-4 sm:py-2 rounded-lg flex items-center space-x-3 cursor-pointer hover:bg-white hover:text-black transition">
+                <i class="fa-solid fa-grip-lines text-sm sm:text-xl"></i>
+                <span class="font-medium text-sm sm:text-base">@item.Name</span>
+            </a>
+        }
+
+    </div>
+</section>
+
+
+<!-- Hakkımızda Bölümü -->
+<section id="about-section" class="py-12 bg-gray-50">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6" data-aos="fade-left">
+            @Localizer["about"]
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto"
+           data-aos="fade-up">
+            @Localizer["aboutUS"]
+        </p>
+    </div>
+</section>
+
+<!-- Öne Çıkan Ürünler -->
+<section id="featured-products"
+         class="py-16 bg-gradient-to-br from-white via-gray-100 to-gray-200">
+    <h2 class="text-4xl font-bold text-center text-gray-800 flex items-center justify-center">
+        <i class="fas fa-tags text-yellow-500 mr-2"></i> Öne Çıkan Ürünler
+    </h2>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+
+        @foreach (ProductDto item in ViewBag.Product)
+        {
+
+            <div class="group bg-white rounded-lg shadow-lg hover:shadow-xl overflow-hidden transition-transform transform hover:-translate-y-2">
+                <img src="@Url.Content(item.Image)"
+                     alt="Takım Elbise"
+                     class="h-64 w-full object-cover group-hover:scale-105 transition duration-300" />
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-indigo-500 transition">
+                       @item.Name
+                    </h3>
+                    <a asp-action="ProductDetail" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Category.SeoUrl)" asp-route-product="@Url.FriendlyUrl(item.SeoUrl)"
+                       class="mt-4 inline-block px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition">Detayları Gör</a>
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+</section>

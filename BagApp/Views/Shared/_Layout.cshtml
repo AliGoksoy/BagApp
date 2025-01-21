@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="Explore stylish and comfortable kids' wear with Looks Kids. Our collection offers the best fashion for your little ones.">
+    <meta name="keywords" content="kids fashion, children clothing, stylish kids wear, Looks Kids">
+    <meta name="author" content="Looks Kids Team">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="~/images/logo/logo.png" type="image/png" style="border-radius: 50%;">
+    <title>Looks Kids</title>
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animation and GSAP -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hc-offcanvas-nav/dist/hc-offcanvas-nav.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="~/css/index.css">
+</head>
+<body>
+
+    <!-- Header Container -->
+    <header>
+        <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 shadow-md z-50 transition-all duration-300">
+            <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+                <!-- Logo and Title -->
+                <a href="~/">
+
+                    <div class="flex items-center space-x-4 cursor-pointer">
+                        <img src="~/images/logo/logo.png" alt="Logo" class="h-8 w-8 rounded-full">
+                        <span class="font-bold text-lg text-white">Looks Kids</span>
+                      
+                    </div>
+                </a>
+
+
+
+                <!-- Mobil Menü Tetikleyici -->
+                <button class="menu-toggle  text-white p-3  lg:hidden z-50">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <nav class="hidden lg:flex space-x-8 justify-center ml-12 flex-grow">
+                    <a href="~/" class="nav-link group text-white flex items-center ml-12 space-x-2 font-medium transition-all duration-500 relative">
+                        <i class="fas fa-home transition-colors duration-500 ease-in-out group-hover:text-black"></i>
+                        <span class="transition-colors duration-500 ease-in-out group-hover:text-black">@Localizer["homepage"]</span>
+                        <span class="absolute bottom-[-3px] left-0 w-0 h-1 bg-black transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                    </a>
+                    <a href="~/category" class="nav-link group text-white flex items-center ml-12 space-x-2 font-medium transition-all duration-500 relative">
+                        <i class="fas fa-box transition-colors duration-500 ease-in-out group-hover:text-black"></i>
+                        <span class="transition-colors duration-500 ease-in-out group-hover:text-black">@Localizer["product"]</span>
+                        <span class="absolute bottom-[-3px] left-0 w-0 h-1 bg-black transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                    </a>
+                    <a href="~/kurumsal" class="nav-link group text-white flex items-center ml-12 space-x-2 font-medium transition-all duration-500 relative">
+                        <i class="fas fa-info-circle transition-colors duration-500 ease-in-out group-hover:text-black"></i>
+                        <span class="transition-colors duration-500 ease-in-out group-hover:text-black">@Localizer["company"]</span>
+                        <span class="absolute bottom-[-3px] left-0 w-0 h-1 bg-black transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                    </a>
+                    <a href="~/iletisim" class="nav-link group text-white flex items-center ml-12 space-x-2 font-medium transition-all duration-500 relative">
+                        <i class="fas fa-info-envelope transition-colors duration-500 ease-in-out group-hover:text-black"></i>
+                        <span class="transition-colors duration-500 ease-in-out group-hover:text-black">@Localizer["contact"]</span>
+                        <span class="absolute bottom-[-3px] left-0 w-0 h-1 bg-black transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                    </a>
+                </nav>
+
+                <!-- Language Selector (Desktop Only) -->
+
+                <partial name="_Culture" />
+
+                <!-- Social Media Links (Desktop Only) -->
+                <div class="hidden lg:flex  px-2 py-1 bg-white rounded shadow-lg">
+                    <a href="https://api.whatsapp.com/send?phone=@TempData["Gsm"]&text=Sipariş vermek istiyorum @TempData["SiteUrl"]"
+                       target="_blank" class="text-black rounded-full flex items-center space-x-2 hover:scale-105 transition-transform">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="w-5 h-5 rounded-full">
+                        <span class="text-black">Whatsapp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <nav id="mobile-menu" class="hidden">
+        <ul>
+            <li><a href="~/">@Localizer["homepage"]</a></li>
+            <li><a href="~/kurumsal">@Localizer["company"]</a></li>
+            <li>
+                <a href="#">@Localizer["product"]</a>
+                @await Component.InvokeAsync("ProductMenuMobil")
+            </li>
+            <li><a href="~/iletisim">@Localizer["contact"]</a></li>
+
+          
+        </ul>
+    
+
+    </nav>
+
+
+
+    @RenderBody()
+
+
+
+
+
+
+    <footer class="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-10" data-aos="fade-up">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Hakkımızda -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">@Localizer["company"]</h3>
+                    <p class="text-gray-400 text-sm">
+                        @Localizer["aboutUS"]
+                    </p>
+                    <a href="~/kurumsal" class="text-purple-400 hover:underline text-sm mt-4 inline-block"> @Localizer["company"]</a>
+                </div>
+                <!-- Sosyal Medya -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">@Localizer["contactus"]</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/lookskids12/" class="text-gray-400 hover:text-purple-400 transition">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="https://www.facebook.com/lookskids" class="text-gray-400 hover:text-purple-400 transition">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="https://www.trendyol.com/magaza/looks-kids-m-248359?sst=0" class="text-gray-400 hover:text-purple-400 transition">
+                            <i class="fab fa-shopify text-2xl"></i>
+                        </a>
+                        <a href="https://t.me/lookskids12" class="text-gray-400 hover:text-purple-400 transition">
+                            <i class="fab fa-telegram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- İletişim -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">@Localizer["contact"]</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <i class="fas fa-envelope text-purple-400 mr-2"></i>
+                            <span>info@lookskids.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt text-purple-400 mr-2"></i>
+                            <span>+90 555 123 45 67</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt text-purple-400 mr-2"></i>
+                            <span>İstanbul, Türkiye</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Hızlı Erişim -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">@Localizer["quickmenu"]</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="~/" class="text-gray-400 hover:text-purple-400 transition">
+                                <i class="fas fa-home mr-2"></i>@Localizer["homepage"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/category" class="text-gray-400 hover:text-purple-400 transition">
+                                <i class="fas fa-tshirt mr-2"></i>@Localizer["product"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/kurumsal" class="text-gray-400 hover:text-purple-400 transition">
+                                <i class="fas fa-info-circle mr-2"></i>@Localizer["about"]
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/iletisim" class="text-gray-400 hover:text-purple-400 transition">
+                                <i class="fas fa-envelope-open-text mr-2"></i>@Localizer["contact"]
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-10 text-center text-gray-500 text-sm border-t border-gray-700 pt-6">
+                <p>© 2025 Looks Kids. @Localizer["copy"].</p>
+              
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/hero.js"></script>
+    <script src="js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hc-offcanvas-nav/dist/hc-offcanvas-nav.min.js"></script>
+    <!-- Swiper.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mobil menüyü başlat
+            const nav = new hcOffcanvasNav('#mobile-menu', {
+                disableAt: 768, // 768px altı ekranlarda aktif
+                customToggle: '.menu-toggle', // Menü açma düğmesi
+                levelSpacing: 40, // Alt menüler arası boşluk
+                navTitle: 'Menu', // Menü başlığı
+                position: 'left', // Menü konumu (left, right, top, bottom)
+                levelTitles: true, // Alt menüler için başlık
+                closeButton: true, // Kapat düğmesi
+                backButton: true, // Geri düğmesi
+                closeOnClick: true, // Menüyü kapatmak için bir bağlantıya tıklayın
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

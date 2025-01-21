@@ -1,0 +1,120 @@
+﻿@model QuestionDto
+<div class="spanel-overlay"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+   
+        <li class="breadcrumb-item"><a href="#">SSS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Yeni Soru</li>
+    </ol>
+</nav> <!-- Breadcrumb end -->
+
+<div class="container-fluid p-4">
+    <form asp-action="AddQuestion" asp-controller="Dashboard" method="post" class="spanel-form" enctype="multipart/form-data">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12">
+                <!-- card-columns spanel-card-columns -->
+                <div class="card portlet rounded-0">
+                    <div class="card-header">
+                        Soru Yönetimi # <code>Yeni Soru Girişi</code>
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Title"></span>
+                                        <label>Başlık</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="Title" class="form-control" placeholder="Soru Başlığı">
+                                    </div>
+                                 
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                            <a asp-action="GetQuestion" asp-controller="Dashboard" class="btn btn-warning">Vazgeç</a>
+
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div> <!-- portlet div end -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card portlet rounded-0">
+                    <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                    <div class="card-header">
+                        Açıklaması (TR)
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <textarea asp-for="Description" id="fulltinymce" cols="30" rows="10"></textarea>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card portlet rounded-0">
+                    <span class="text-danger" asp-validation-for="@Model.DescriptionEn"></span>
+                    <div class="card-header">
+                        Açıklama (EN)
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <textarea asp-for="DescriptionEn" id="fulltinymceEn" cols="30" rows="10"></textarea>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card portlet rounded-0">
+                    <span class="text-danger" asp-validation-for="@Model.DescriptionAr"></span>
+                    <div class="card-header">
+                        Açıklama (AR)
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+                            <div class="form-group">
+                                <textarea asp-for="DescriptionAr" id="fulltinymceAr" cols="30" rows="10"></textarea>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

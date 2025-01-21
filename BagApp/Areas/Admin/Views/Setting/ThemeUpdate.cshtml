@@ -1,0 +1,276 @@
+﻿@model ThemeDto
+
+<div class="spanel-overlay"></div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+     
+        <li class="breadcrumb-item"><a href="#">Ayarlar</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tema Ayarları</li>
+    </ol>
+</nav> <!-- Breadcrumb end -->
+<div class="container-fluid p-4">
+    <form asp-action="ThemeUpdate" asp-controller="Setting" asp-area="Admin" method="post" class="spanel-form" enctype="multipart/form-data">
+        @if (ViewBag.Success!=null)
+        {
+        <h5>@ViewBag.Success</h5>
+        }
+        <div class="row">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="LogoUrl" />
+            <input type="hidden" asp-for="FooterLogoUrl" />
+            <input type="hidden" asp-for="Favicon" />
+            <div class="col-md-6 col-sm-12">
+                <!-- card-columns spanel-card-columns -->
+                <div class="card portlet rounded-0">
+                    <div class="card-header">
+                        Ayarlar # <code>Tema Ayarları</code>
+
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.CompanyName"></span>
+                                        <label>Firma Adı</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="CompanyName" class="form-control" placeholder="Site Başlık">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.SiteUrl"></span>
+                                        <label>Firma Url</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="SiteUrl" class="form-control" placeholder="www.domain.com">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Gsm"></span>
+                                        <label>Telefon</label> <small class="form-text text-muted">Whatsapp için kullanılacak</small>
+                                        <input type="text" asp-for="Gsm" class="form-control" placeholder="Gsm">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Phone"></span>
+                                        <label>İş Telefonu</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="Phone" class="form-control" placeholder="pbx">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                                        <label>Email</label> <small class="form-text text-muted">Birinci iletişim</small>
+                                        <input type="text" asp-for="Email" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Email2"></span>
+                                        <label>Email 2</label> <small class="form-text text-muted"></small>
+                                        <input type="text" asp-for="Email2" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Address"></span>
+                                        <label>Adres Bilgisi</label> <small class="form-text text-muted">Adres</small>
+                                        <input type="text" asp-for="Address" class="form-control" placeholder="Adres bilgisi">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.GoogleVerify"></span>
+                                        <label>Google Doğrulama Kodu</label> <small class="form-text text-muted">google-site-verification</small>
+                                        <input type="text" asp-for="GoogleVerify" class="form-control" placeholder="udxxxxxxxxx_xxxxxxxxxx_Nxxxxxxxxxxx">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.MetaDesc"></span>
+                                        <label>Meta Description</label> <small class="form-text text-muted">Description</small>
+                                        <input type="text" asp-for="MetaDesc" class="form-control" placeholder="Sitenizi anlatan kısa açıklama ekleyiniz">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.MetaKeyword"></span>
+                                        <label>Meta Anahtar Kelimeler</label> <small class="form-text text-muted">Keywords</small>
+                                        <input type="text" asp-for="MetaKeyword" class="form-control" placeholder=" Örnek:çanta,imalat,imalat dukkan vb">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Smpt"></span>
+                                        <label>Sunucu Adresi</label> <small class="form-text text-muted"> (SMPT)</small>
+                                        <input type="text" asp-for="Smpt" class="form-control" placeholder="mail.xxxx.com">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Password"></span>
+                                        <label>Mail Şifresi</label> <small class="form-text text-muted">Şifre</small>
+                                        <input type="password" asp-for="Password" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Facebook"></span>
+                                        <label>Facebook</label> <small class="form-text text-muted"> (Facebook)</small>
+                                        <input type="text" asp-for="Facebook" class="form-control" placeholder="facebook adresiniz">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Youtube"></span>
+                                        <label>Youtube</label> <small class="form-text text-muted"> (Youtube)</small>
+                                        <input type="text" asp-for="Youtube" class="form-control" placeholder="facebook adresiniz">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group spanel-form-group">
+                                        <span class="text-danger" asp-validation-for="@Model.Twitter"></span>
+                                        <label>Instagram</label> <small class="form-text text-muted"> (Instagram)</small>
+                                        <input type="text" asp-for="Twitter" class="form-control" placeholder="Instagram adresiniz">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                        <label>Site Logo </label><code>306x88px PNG</code>
+                                        <div class="fileinput-preview img-thumbnail mb-1" data-trigger="fileinput" style="width: 100%; height: 150px;">
+
+                                            <img src="@Url.Content(Model.LogoUrl)" alt="">
+                                        </div>
+                                        <div>
+                                            <span class="btn-file">
+                                                <span class="btn btn-outline-secondary fileinput-new">Resim Seç</span>
+                                                <span class="btn btn-outline-secondary fileinput-exists">Değiştir</span>
+                                                <input type="file" name="LogoUrl">
+                                            </span>
+                                            <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Sil</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                        <label>Footer Logo </label><code>306x88px PNG</code>
+                                        <div class="fileinput-preview img-thumbnail mb-1" data-trigger="fileinput" style="width: 100%; height: 150px;">
+                                            <img src="@Url.Content(Model.FooterLogoUrl)" alt="">
+                                        </div>
+                                        <div>
+                                            <span class="btn-file">
+                                                <span class="btn btn-outline-secondary fileinput-new">Resim Seç</span>
+                                                <span class="btn btn-outline-secondary fileinput-exists">Değiştir</span>
+                                                <input type="file" name="FooterImage">
+                                            </span>
+                                            <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Sil</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                                        <label>Favicon </label><code>500x500px PNG</code>
+                                        <div class="fileinput-preview img-thumbnail mb-1" data-trigger="fileinput" style="width: 100%; height: 150px;">
+                                            <img src="@Url.Content(Model.Favicon)" alt="">
+                                        </div>
+                                        <div>
+                                            <span class="btn-file">
+                                                <span class="btn btn-outline-secondary fileinput-new">Resim Seç</span>
+                                                <span class="btn btn-outline-secondary fileinput-exists">Değiştir</span>
+                                                <input type="file" name="FaviconImage">
+                                            </span>
+                                            <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Sil</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <a asp-action="Index" asp-controller="Dashboard" class="btn btn-warning">Vazgeç</a>
+
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div> <!-- portlet div end -->
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card portlet rounded-0">
+                    <div class="card-header">
+                        Firma Açıklamaları
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="collapse show">
+                        <div class="card-body">
+
+                            <h5>Hakkımızda (TR)</h5>
+                            <div class="form-group">
+                                <textarea asp-for="About" id="fulltinymce" cols="30" rows="10"></textarea>
+                            </div>
+                            <h5>Kısa Açıklama</h5> <code>Footer alanında gösterilecek</code>
+                            <div class="form-group">
+                                <textarea asp-for="ShortAbout" id="basictinymce" cols="30" rows="10"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                 
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+

@@ -1,0 +1,40 @@
+﻿@model List<ProductDto>
+<section class="mt-7 appear-animate" data-animation-options="{
+                    'delay': '.2s'
+                }">
+    <div class="container">
+        <h2 class="title title-center">@ViewBag.CategoryName</h2>
+        <div class="row cols-2 cols-sm-3 cols-lg-4 product-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-2 col-md-3 col-sm-2">
+                    <div class="product text-center">
+                        <figure class="product-media">
+                            <a asp-action="ProductDetail" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Category.SeoUrl)"  asp-route-product="@Url.FriendlyUrl(item.SeoUrl)">
+                                <img src="@Url.Content(item.Image)" alt="@item.Name" width="345"
+                                     height="255">
+                            </a>
+
+
+                        </figure>
+                        <div class="product-details">
+                            <div class="product-cat">
+                                <a asp-action="ProductDetail" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Category.SeoUrl)"  asp-route-product="@Url.FriendlyUrl(item.SeoUrl)">@item.Name</a>
+                            </div>
+                            <div class="product-cat">
+                                <a asp-action="GetCategoryId" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Category.Name)">@item.Category.Name</a>
+                            </div>
+                            <h5 class="product-name text-center">
+                                <a asp-action="ProductDetail" asp-controller="Home" asp-route-category="@Url.FriendlyUrl(item.Category.SeoUrl)"  asp-route-product="@Url.FriendlyUrl(item.SeoUrl)">@item.StockNo</a>
+                            </h5>
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</section>
